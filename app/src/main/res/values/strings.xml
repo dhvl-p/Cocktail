@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Cocktail</string>
     <string name="toast_error">Something went wrong. Please try again.</string>
+    <string name="search">Search</string>
 </resources>

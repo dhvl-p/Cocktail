@@ -33,6 +33,7 @@ import com.e.cocktil.presentation.screen.home.HomeScreen
 import com.e.cocktil.ui.theme.CocktilTheme
 import com.e.cocktil.presentation.screen.BottomNavItem
 import com.e.cocktil.presentation.screen.account.AccountScreen
+import com.e.cocktil.presentation.screen.cocktailDetail.CocktailDetailScreen
 import com.e.composedemo.SearchScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -56,7 +57,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreenView(){
     val navController = rememberNavController()
-
+    NavigationGraph(navController = navController)
     val buttonsVisible = remember { mutableStateOf(true) }
     Scaffold(
         bottomBar = {

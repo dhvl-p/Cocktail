@@ -6,5 +6,5 @@ import java.io.Serializable
 
 data class CocktailDetailList(
     @SerializedName("drinks")
-    val drinks: List<Cocktail>
+    val drinks: List<CocktailDetail>
 ): Serializable
