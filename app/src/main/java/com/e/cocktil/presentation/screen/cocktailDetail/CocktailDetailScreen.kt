@@ -26,26 +26,7 @@ fun CocktailDetailScreen(navController: NavHostController, viewModel: CocktailDe
             //  backgroundColor = topAppbarBackgroundColor
         )
     }) {
-       /* when (val movieResponse = viewModel.movieState.value) {
-            is com.e.domain.util.Result.Loading -> ProgressBar()
-            is com.e.domain.util.Result.Success -> LazyColumn(
-                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp)
-            ) {
-                movieResponse.data?.let { movieList ->
-                    items(
-                        items = movieList.drinks,
-                        itemContent = {
-                            CocktailListItem(movie = it, navController = navController)
-                        }
-                    )
-                }
-            }
-            is com.e.domain.util.Result.Error -> Toast.makeText(
-                LocalContext.current,
-                stringResource(R.string.toast_error),
-                Toast.LENGTH_SHORT
-            )
-        }*/
+
     }
 }
 

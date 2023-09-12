@@ -53,6 +53,7 @@ fun HomeScreen() {
             pageCount = items.size,
             state = pagerState,
             verticalAlignment = Alignment.Top, //add this
+            modifier = Modifier.weight(1f)
         ) {
             Box(
                 modifier = Modifier
@@ -75,7 +76,7 @@ fun HomeScreen() {
                         modifier = Modifier.padding(top = 16.dp, start = 16.dp)
                     )
                     Text(
-                        text = items[it].title.toString(),
+                        text = items[it].title,
                         color = colorResource(id = R.color.white),
                         fontSize = 32.sp,
                         modifier = Modifier.padding(top = 8.dp, start = 16.dp)
@@ -158,10 +159,32 @@ fun HomeScreen() {
                 }
 
             }
-
-
         }
+        Spacer(modifier = Modifier.height(4.dp))
 
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 10.dp, horizontal = 10.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            Text(
+                text = "Today Recipes",
+                color = colorResource(id = R.color.white),
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Medium,
+                modifier = Modifier.padding(top = 2.dp, start = 5.dp).weight(1f)
+            )
+
+            Text(
+                text = "View All",
+                color = colorResource(id = R.color.white),
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium,
+                modifier = Modifier.padding(top = 2.dp, end = 5.dp)
+            )
+        }
 
     }
 
@@ -210,7 +233,7 @@ fun createItems() = listOf(
     HorizontalPagerContent(
         image = R.drawable.image1,
         chefImage = R.drawable.image2,
-        title = "Veg Roll",
+        title = "Kathi Roll",
         chefName = "Sanjeev Kapoor",
         postedTime = 2,
         rating = 1.0,

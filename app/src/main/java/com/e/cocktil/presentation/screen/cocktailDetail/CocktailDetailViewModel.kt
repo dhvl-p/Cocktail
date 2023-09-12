@@ -17,15 +17,15 @@ import javax.inject.Inject
 class CocktailDetailViewModel @Inject constructor(
     private val getCocktailDetailUseCase: GetCocktailDetailUseCase
 ) : ViewModel() {
-    private val _movieState = mutableStateOf<Result<CocktailDetailList>>(Result.Loading())
-    val movieState: State<Result<CocktailDetailList>> = _movieState
+    private val _coccktailState = mutableStateOf<Result<CocktailDetailList>>(Result.Loading())
+    val cocktailState: State<Result<CocktailDetailList>> = _coccktailState
     init {
         getCocktailDetail()
     }
 
     private fun getCocktailDetail() {
         viewModelScope.launch {
-          _movieState.value =  getCocktailDetailUseCase()
+            _coccktailState.value =  getCocktailDetailUseCase()
         }
     }
 }

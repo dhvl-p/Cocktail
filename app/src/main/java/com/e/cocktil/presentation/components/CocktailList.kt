@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 import com.e.cocktil.R
 
 @Composable
-fun CocktailListItem(movie: Cocktail) {
+fun CocktailListItem(cocktail: Cocktail) {
     Card(
         modifier = Modifier
             .padding(top = 8.dp)
@@ -36,7 +36,7 @@ fun CocktailListItem(movie: Cocktail) {
                 .height(100.dp)
         ) {
             val painter =
-                rememberAsyncImagePainter(model = movie.strDrinkThumb)
+                rememberAsyncImagePainter(model = cocktail.strDrinkThumb)
             Image(
                 painter = painter,
                 contentDescription = null,
@@ -44,7 +44,7 @@ fun CocktailListItem(movie: Cocktail) {
                 contentScale = ContentScale.Crop
             )
             Text(
-                text = movie.strDrink,
+                text = cocktail.strDrink,
                 color = colorResource(id = R.color.white),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,

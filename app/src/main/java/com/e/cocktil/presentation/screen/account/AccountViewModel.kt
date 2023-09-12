@@ -18,10 +18,10 @@ class AccountViewModel @Inject constructor(
     private val _cocktailState = mutableStateOf<Result<CocktailList>>(Result.Loading())
     val cocktailState: State<Result<CocktailList>> = _cocktailState
     init {
-        getPopularMovies()
+        getCocktailList()
     }
 
-    private fun getPopularMovies() {
+    private fun getCocktailList() {
         viewModelScope.launch {
             _cocktailState.value =  getCocktailUseCase()
         }

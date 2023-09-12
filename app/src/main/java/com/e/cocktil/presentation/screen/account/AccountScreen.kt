@@ -33,9 +33,9 @@ fun AccountScreen(viewModel: AccountViewModel = hiltViewModel()) {
     }
 
     Scaffold() {
-        when (val movieResponse = viewModel.cocktailState.value) {
+        when (val cocktailResponse = viewModel.cocktailState.value) {
             is com.e.domain.util.Result.Loading -> ProgressBar()
-            is com.e.domain.util.Result.Success -> movieResponse.data?.let { it1 ->
+            is com.e.domain.util.Result.Success -> cocktailResponse.data?.let { it1 ->
                 setupHomeScreen(it1)
             }
 
@@ -49,14 +49,14 @@ fun AccountScreen(viewModel: AccountViewModel = hiltViewModel()) {
 }
 
 @Composable
-fun setupHomeScreen(movieResponse: CocktailList) {
+fun setupHomeScreen(cocktailResponse: CocktailList) {
     LazyColumn(
         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp)
     ) {
         items(
-            items = movieResponse.drinks,
+            items = cocktailResponse.drinks,
             itemContent = {
-                CocktailListItem(movie = it)
+                CocktailListItem(cocktail = it)
             }
         )
     }
