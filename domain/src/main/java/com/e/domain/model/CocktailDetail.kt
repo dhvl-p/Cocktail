@@ -23,19 +23,11 @@ data class CocktailDetail(
     @SerializedName("strGlass")
     val strGlass: String,
     @SerializedName("strInstructions")
-    val strInstructions: String,
+    val strInstructions: String?,
     @SerializedName("strInstructionsDE")
-    val strInstructionsDE: String,
+    val strInstructionsDE: String?,
     @SerializedName("strInstructionsIT")
-    val strInstructionsIT: String,
+    val strInstructionsIT: String?,
     @SerializedName("strDrinkThumb")
     val strDrinkThumb: String,
-    @SerializedName("strIngredient1")
-    val strIngredient1: String,
-    @SerializedName("strIngredient2")
-    val strIngredient2: String,
-    @SerializedName("strIngredient3")
-    val strIngredient3: String,
-    @SerializedName("strIngredient4")
-    val strIngredient4: String,
 ) : Serializable

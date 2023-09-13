@@ -50,6 +50,7 @@ import com.e.cocktil.presentation.components.CocktailListItem
 import com.e.cocktil.presentation.components.ProgressBar
 import com.e.cocktil.presentation.components.RatingBarComponent
 import com.e.cocktil.presentation.screen.cocktailDetail.CocktailDetailActivity
+import com.e.data.Static
 import com.e.domain.model.CocktailList
 import com.e.domain.model.HorizontalPagerContent
 
@@ -203,20 +204,20 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
                 modifier = Modifier.padding(top = 2.dp, end = 5.dp)
             )
         }
-        
-        when (val cocktailResponse = viewModel.cocktailState.value) {
-            is com.e.domain.util.Result.Loading -> ProgressBar()
-            is com.e.domain.util.Result.Success -> cocktailResponse.data?.let { it1 ->
-                customListView(it1)
+        if(Common.isInternetAvailable(LocalContext.current)){
+            when (val cocktailResponse = viewModel.cocktailState.value) {
+                is com.e.domain.util.Result.Loading -> ProgressBar()
+                is com.e.domain.util.Result.Success -> cocktailResponse.data?.let { it1 ->
+                    customListView(viewModel,it1)
+                }
+
+                is com.e.domain.util.Result.Error -> Toast.makeText(
+                    LocalContext.current,
+                    stringResource(R.string.toast_error),
+                    Toast.LENGTH_SHORT
+                )
             }
-
-            is com.e.domain.util.Result.Error -> Toast.makeText(
-                LocalContext.current,
-                stringResource(R.string.toast_error),
-                Toast.LENGTH_SHORT
-            )
         }
-
     }
 
 }
@@ -321,7 +322,7 @@ fun getText(rating: Double): String {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun customListView(list: CocktailList) {
+fun customListView(viewModel: HomeViewModel,list: CocktailList) {
     val context = LocalContext.current
     LazyRow(
         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp)
@@ -329,6 +330,7 @@ fun customListView(list: CocktailList) {
         items(
             items = list.drinks,
             itemContent = {
+                viewModel.insertCocktailData(it)
                 Card(
                     // inside our grid view on below line
                     // we are adding on click for each item of our grid view.
@@ -339,6 +341,7 @@ fun customListView(list: CocktailList) {
                         .padding(4.dp)
                         .height(120.dp),
                     onClick = {
+                        Static.drinkId = it.idDrink
                         val intent = Intent(context, CocktailDetailActivity::class.java)
                         intent.putExtra("Name", it.strDrink)
                         context.startActivity(intent)

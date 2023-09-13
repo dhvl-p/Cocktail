@@ -183,13 +183,15 @@ fun cocktailDetail(cocktailDetail: CocktailDetail) {
                         fontWeight = FontWeight.Medium,
                         modifier = Modifier.padding(top = 2.dp, end = 4.dp, start = 20.dp)
                     )
-                    Text(
-                        cocktailDetail.strInstructions,
-                        color = colorResource(id = R.color.white),
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Medium,
-                        modifier = Modifier.padding(top = 2.dp, end = 2.dp)
-                    )
+                    cocktailDetail.strInstructions?.let {
+                        Text(
+                            it,
+                            color = colorResource(id = R.color.white),
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Medium,
+                            modifier = Modifier.padding(top = 2.dp, end = 2.dp)
+                        )
+                    }
                 }
                 Row {
                     Text(
@@ -199,13 +201,15 @@ fun cocktailDetail(cocktailDetail: CocktailDetail) {
                         fontWeight = FontWeight.Medium,
                         modifier = Modifier.padding(top = 2.dp, end = 4.dp, start = 20.dp)
                     )
-                    Text(
-                        cocktailDetail.strInstructionsDE,
-                        color = colorResource(id = R.color.white),
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Medium,
-                        modifier = Modifier.padding(top = 2.dp, end = 2.dp)
-                    )
+                    cocktailDetail.strInstructionsDE?.let {
+                        Text(
+                            it,
+                            color = colorResource(id = R.color.white),
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Medium,
+                            modifier = Modifier.padding(top = 2.dp, end = 2.dp)
+                        )
+                    }
                 }
 
                 Row {
@@ -216,13 +220,15 @@ fun cocktailDetail(cocktailDetail: CocktailDetail) {
                         fontWeight = FontWeight.Medium,
                         modifier = Modifier.padding(top = 2.dp, end = 2.dp, start = 20.dp)
                     )
-                    Text(
-                        cocktailDetail.strInstructionsIT,
-                        color = colorResource(id = R.color.white),
-                        fontSize = 18.sp,
-                        fontWeight = FontWeight.Medium,
-                        modifier = Modifier.padding(top = 2.dp, end = 2.dp)
-                    )
+                    cocktailDetail.strInstructionsIT?.let {
+                        Text(
+                            it,
+                            color = colorResource(id = R.color.white),
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Medium,
+                            modifier = Modifier.padding(top = 2.dp, end = 2.dp)
+                        )
+                    }
                 }
 
             }

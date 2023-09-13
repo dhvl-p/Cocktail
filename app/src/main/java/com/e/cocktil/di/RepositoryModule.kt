@@ -1,5 +1,6 @@
 package com.e.cocktil.di
 
+import com.e.data.database.CocktailDao
 import com.e.domain.repository.CocktailDetailRepository
 import com.e.domain.repository.CocktailRepository
 import dagger.Module
@@ -17,8 +18,8 @@ import com.e.data.repository.dataSource.CocktailRemoteDataSource
 object RepositoryModule {
 
     @Provides
-    fun provideCocktailsRepository(cocktailRemoteDataSource: CocktailRemoteDataSource) : CocktailRepository=
-        CocktailRepositoryImpl(cocktailRemoteDataSource)
+    fun provideCocktailsRepository(cocktailRemoteDataSource: CocktailRemoteDataSource, cocktailDao: CocktailDao) : CocktailRepository=
+        CocktailRepositoryImpl(cocktailRemoteDataSource,cocktailDao)
 
     @Provides
     fun provideCocktailDetailRepository(cocktailDetailRemoteDataSource: CocktailDetailRemoteDataSource) : CocktailDetailRepository =

@@ -89,4 +89,13 @@ dependencies {
 
     //Coil
     implementation("io.coil-kt:coil-compose:2.4.0")
+
+    //Room
+    implementation("androidx.room:room-runtime:2.4.2")
+    implementation("androidx.room:room-ktx:2.4.2")
+    implementation("androidx.compose.runtime:runtime-livedata:1.2.1")
+    annotationProcessor("androidx.room:room-compiler:2.4.2")
+    kapt("androidx.room:room-compiler:2.4.2")
+
+    implementation("io.reactivex.rxjava2:rxandroid:2.1.0")
 }
