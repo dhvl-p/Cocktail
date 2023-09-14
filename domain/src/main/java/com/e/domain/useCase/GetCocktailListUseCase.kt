@@ -25,7 +25,7 @@ class GetCocktailsUseCase(private val cocktailRepository: CocktailRepository) {
 
 
 
-    fun getCocktailFromDatabase(): Maybe<List<Cocktail>> {
+    fun getCocktailFromDatabase(): List<Cocktail> {
         return cocktailRepository.getCocktailFromDatabase()
     }
     /* fun getCocktail(cocktail: List<Cocktail>): Maybe<List<Cocktail>> = cocktailRepository.isDataExist(cocktail.idDrink)

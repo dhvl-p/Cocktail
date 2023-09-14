@@ -13,11 +13,11 @@ class CocktailRepositoryImpl(private val cocktailRemoteDataSource: CocktailRemot
     CocktailRepository {
     override suspend fun getCocktails() = responseToRequest(cocktailRemoteDataSource.getCocktails())
 
-    override fun insertCocktail(cocktail: Cocktail): Maybe<Long> {
+    override fun insertCocktail(cocktail: Cocktail) {
         return cocktailDao.insertAll(cocktail)
     }
 
-    override fun getCocktailFromDatabase(): Maybe<List<Cocktail>> {
+    override fun getCocktailFromDatabase(): List<Cocktail> {
        return cocktailDao.getCocktailList()
     }
 

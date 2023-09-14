@@ -1,7 +1,5 @@
 package com.e.cocktil.di
 
-import android.app.Application
-import com.e.cocktil.Common
 import com.e.data.api.CocktailApi
 import dagger.Module
 import dagger.Provides

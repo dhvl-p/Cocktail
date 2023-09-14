@@ -6,7 +6,7 @@ import io.reactivex.Maybe
 
 interface CocktailRepository {
      suspend fun getCocktails(): Result<CocktailList>
-     fun insertCocktail(cocktail: Cocktail): Maybe<Long>
+     fun insertCocktail(cocktail: Cocktail)
 
-     fun getCocktailFromDatabase() : Maybe<List<Cocktail>>
+     fun getCocktailFromDatabase() : List<Cocktail>
 }

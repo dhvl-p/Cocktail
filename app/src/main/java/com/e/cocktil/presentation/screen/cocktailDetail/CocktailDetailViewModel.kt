@@ -7,9 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.e.cocktil.Common
 import com.e.domain.model.CocktailDetailList
-import com.e.domain.model.CocktailList
 import com.e.domain.useCase.GetCocktailDetailUseCase
-import com.e.domain.useCase.GetCocktailsUseCase
 import com.e.domain.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext

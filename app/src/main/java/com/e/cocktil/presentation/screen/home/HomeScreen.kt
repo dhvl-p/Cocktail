@@ -10,19 +10,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,24 +29,17 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.e.cocktil.Common
 import com.e.cocktil.R
-import com.e.cocktil.presentation.components.CocktailListItem
 import com.e.cocktil.presentation.components.ProgressBar
 import com.e.cocktil.presentation.components.RatingBarComponent
 import com.e.cocktil.presentation.screen.cocktailDetail.CocktailDetailActivity
 import com.e.data.Static
+import com.e.domain.model.Cocktail
 import com.e.domain.model.CocktailList
 import com.e.domain.model.HorizontalPagerContent
 
@@ -204,17 +193,39 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
                 modifier = Modifier.padding(top = 2.dp, end = 5.dp)
             )
         }
-        if(Common.isInternetAvailable(LocalContext.current)){
+        if (Common.isInternetAvailable(LocalContext.current)) {
             when (val cocktailResponse = viewModel.cocktailState.value) {
                 is com.e.domain.util.Result.Loading -> ProgressBar()
                 is com.e.domain.util.Result.Success -> cocktailResponse.data?.let { it1 ->
-                    customListView(viewModel,it1)
+                    LazyRow(
+                        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp)
+                    ) {
+                        items(
+                            items = it1.drinks,
+                            itemContent = {
+                                customListViewItems(viewModel, it)
+
+                            }
+                        )
+                    }
                 }
 
                 is com.e.domain.util.Result.Error -> Toast.makeText(
                     LocalContext.current,
                     stringResource(R.string.toast_error),
                     Toast.LENGTH_SHORT
+                )
+            }
+        } else {
+            LazyRow(
+                contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp)
+            ) {
+                items(
+                    items = viewModel.getCocktaildataFromDatbase(),
+                    itemContent = {
+                        customListViewItems(viewModel, it)
+
+                    }
                 )
             }
         }
@@ -319,64 +330,37 @@ fun getText(rating: Double): String {
 
 }
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun customListView(viewModel: HomeViewModel,list: CocktailList) {
+fun customListViewItems(viewModel: HomeViewModel, it: Cocktail) {
     val context = LocalContext.current
-    LazyRow(
-        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp)
-    ) {
-        items(
-            items = list.drinks,
-            itemContent = {
-                viewModel.insertCocktailData(it)
-                Card(
-                    // inside our grid view on below line
-                    // we are adding on click for each item of our grid view.
-                    // in the below line, we are adding
-                    // padding from our all sides.
-                    modifier = Modifier
-                        .width(120.dp)
-                        .padding(4.dp)
-                        .height(120.dp),
-                    onClick = {
-                        Static.drinkId = it.idDrink
-                        val intent = Intent(context, CocktailDetailActivity::class.java)
-                        intent.putExtra("Name", it.strDrink)
-                        context.startActivity(intent)
-                    }
-
-                    // in the below line, we are adding
-                    // elevation for the card.
-
-                )
-                {
-                    // in the below line, we are creating
-                    // a row for our list view item.
-                    Column(
-                        // for our row we are adding modifier
-                        // to set padding from all sides.
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        // in the below line, inside row we are adding spacer
-                        // Spacer(modifier = Modifier.height(5.dp))
-
-                        // in the below line, we are adding Image to display the image.
-                        val painter =
-                            rememberAsyncImagePainter(model = it.strDrinkThumb)
-                        Image(
-                            painter = painter,
-                            contentDescription = null,
-                            modifier = Modifier.fillMaxSize(),
-                            contentScale = ContentScale.Crop
-                        )
-                    }
-                }
-            }
-        )
+    viewModel.insertCocktailData(it)
+    Card(
+        modifier = Modifier
+            .width(120.dp)
+            .padding(4.dp)
+            .height(120.dp),
+        onClick = {
+            Static.drinkId = it.idDrink
+            val intent = Intent(context, CocktailDetailActivity::class.java)
+            intent.putExtra("Name", it.strDrink)
+            context.startActivity(intent)
+        }
+    )
+    {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            val painter =
+                rememberAsyncImagePainter(model = it.strDrinkThumb)
+            Image(
+                painter = painter,
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+        }
     }
 }
-

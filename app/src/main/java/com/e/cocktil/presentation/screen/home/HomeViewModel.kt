@@ -3,9 +3,6 @@ package com.e.cocktil.presentation.screen.home
 import android.content.Context
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.e.cocktil.Common
@@ -15,7 +12,6 @@ import com.e.domain.useCase.GetCocktailsUseCase
 import com.e.domain.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -46,9 +42,11 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun getCocktaildata() {
+     fun getCocktaildataFromDatbase(): List<Cocktail> {
+         var cocktailList : List<Cocktail> = listOf()
         viewModelScope.launch(Dispatchers.IO) {
-            getCocktailUseCase.getCocktailFromDatabase()
+           cocktailList =  getCocktailUseCase.getCocktailFromDatabase()
         }
+         return cocktailList
     }
 }

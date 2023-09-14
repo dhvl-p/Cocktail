@@ -54,8 +54,6 @@ import com.e.cocktil.Common
 import com.e.cocktil.R
 import com.e.cocktil.presentation.components.ProgressBar
 import com.e.cocktil.presentation.screen.cocktailDetail.CocktailDetailActivity
-import com.e.cocktil.presentation.screen.home.HomeViewModel
-import com.e.cocktil.presentation.screen.home.customListView
 import com.e.cocktil.presentation.screen.search.SearchViewModel
 import com.e.data.Static
 import com.e.domain.model.CocktailList
